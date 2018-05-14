@@ -1,31 +1,34 @@
-var render = new THREE.WebGLRenderer({canvas: document.getElementById('canvas'),
-                                    antialias: true});
+/* global THREE */
 
-var camera = new THREE.PerspectiveCamera(90,window.innerWidth/window.innerHeight,
-    	                                  0.1,3000);
-
-render.setSize(window.innerWidth, window.innerHeight)
+var p1 = new Player();
 
 var scene = new THREE.Scene();
 
-var light = new THREE.AmbientLight(0xffffff,0.5);
-scene.add(light);
+var object_list = [];
 
-var light2 = new THREE.PointLight(0xffffff,0.5);
-scene.add(light2);
+var render = new THREE.WebGLRenderer
+        ({canvas: document.getElementById('canvas'), antialias: true});
+render.setSize(window.innerWidth, window.innerHeight);
 
-var geo = new THREE.BoxGeometry(10,10,10);
-var mat = new THREE.MeshLambertMaterial({color: 0x0123456});
-var mesh = new THREE.Mesh(geo, mat)
-mesh.position.set(0,0,-50);
+var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+
+var pointLight = new THREE.PointLight(0xffffff, 0.5);
+scene.add(pointLight);
+
+var geo = new THREE.BoxGeometry(10, 10, 10);
+var mat = new THREE.MeshLambertMaterial({color: 0x123456});
+var mesh = new THREE.Mesh(geo, mat);
+mesh.position.set(0, 0, -50);
 
 scene.add(mesh);
+object_list.push(mesh);
 
-requestAnimationFrame(animate);
-
-function animate(){
-  mesh.rotation.x += 0.01;
-  mesh.rotation.y += 0.01;
-  render.render(scene, camera);
-  requestAnimationFrame(animate);
+function animate() {
+    mesh.rotation.x += 0.01;
+    mesh.rotation.y += 0.01;
+    p1.update();
+    render.render(scene, p1.cam);
+    requestAnimationFrame(animate);
 }
+animate();
