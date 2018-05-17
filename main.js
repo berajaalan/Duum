@@ -25,8 +25,6 @@ scene.add(mesh);
 object_list.push(mesh);
 
 function animate() {
-    mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.01;
     p1.update();
     render.render(scene, p1.cam);
     requestAnimationFrame(animate);
