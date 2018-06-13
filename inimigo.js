@@ -37,12 +37,6 @@ class Enemy {
         if (this.mesh.position.z + 10 >= 250 || this.mesh.position.z - 10 <= -250) {
             this.mesh.position.z -= this.vel.z;
         }
-        
-        var d = Math.sqrt(Math.pow(p1.cam.position.x-this.mesh.x,2)+Math.pow(p1.cam.position.z-this.mesh.z,2));
-        
-        if (d < 15) {
-            p1.hp -= 10;
-        }
     }
 
 }

@@ -85,10 +85,10 @@ scene.add(n.mesh);
 
 function animate() {
     tick++;
-    p1.update();
     if (tick >= 100) {
         var novo = new Enemy();
         var a = Math.floor(Math.random() * 100);
+        console.log(a);
         if (a <= 25) {
             novo.mesh.position.set(200, 0, 200);
             enemy_list.push(novo);
@@ -110,12 +110,19 @@ function animate() {
             object_list.push(n.mesh);
             scene.add(n.mesh);
         }
-
+        //console.log(enemy_list);
         tick = 0;
     }
     for (var i = 0; i < enemy_list.length; i++) {
         enemy_list[i].update();
+        p1.enemyCollision(enemy_list[i]);
     }
+    if (p1.hp <= 0){
+            window.alert("Game Over");
+            window.location.reload(true);
+            p1.hp = 1000;
+        }
+    p1.update(enemy_list);
     render.render(scene, p1.cam);
     requestAnimationFrame(animate);
 }
