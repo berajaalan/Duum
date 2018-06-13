@@ -7,7 +7,7 @@ class Player {
         this.camVel = 0;
         this.camF = new THREE.Vector3();
         this.cam = new THREE.PerspectiveCamera
-                (90, window.innerWidth / window.innerHeight, 0.1, 3000);
+                (65, window.innerWidth / window.innerHeight, 0.1, 800);
         this.forward = false;
         this.back = false;
         this.lookLeft = false;
@@ -81,17 +81,27 @@ class Player {
             this.vel.set(0,0,0);
         
         if (this.lookLeft) {
-            this.camVel = 0.05;
+            this.camVel = 0.025;
         }
         
         if (this.lookRight) {
-            this.camVel = -0.05;
+            this.camVel = -0.025;
         }
         
         if (!this.lookLeft && !this.lookRight) {
             this.camVel = 0;
         }
 
+    }
+    
+    collision(){
+        if (this.cam.position.x + 10 >= 250 || this.cam.position.x - 10 <= -250) {
+            this.cam.position.x -= this.vel.x;
+        }
+        
+        if (this.cam.position.z + 10 >= 250 || this.cam.position.z - 10 <= -250) {
+            this.cam.position.z -= this.vel.z;
+        }
     }
 
     update() {
@@ -102,6 +112,8 @@ class Player {
         this.cam.position.y += this.vel.y;
         this.cam.position.z += this.vel.z;
         this.cam.rotation.y += this.camVel;
+        
+        this.collision();
     }
 
 }
