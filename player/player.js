@@ -12,58 +12,7 @@ class Player {
         this.back = false;
         this.lookLeft = false;
         this.lookRight = false;
-        document.addEventListener("keydown", this.keyPress);
-        document.addEventListener("keyup", this.keyRelease);
-    }
-
-    keyPress(e) {
-        switch (e.keyCode) {
-            // W (Forward)
-            case 87:
-                p1.forward = true;
-                break;
-
-                // S (Back)
-            case 83:
-                p1.back = true;
-                break;
-
-                // D (Right)
-            case 68:
-                p1.lookRight = true;
-                break;
-            
-            // A (Left)
-            case 65:
-                p1.lookLeft = true;
-                break;
-            
-        }
-    }
-
-    keyRelease(e) {
-        switch (e.keyCode) {
-            // W (Forward)
-            case 87:
-                p1.forward = false;
-                break;
-
-                // S (Back)
-            case 83:
-                p1.back = false;
-                break;
-
-                // D (Right)
-            case 68:
-                p1.lookRight = false;
-                break;
-            
-            // A (Left)
-            case 65:
-                p1.lookLeft = false;
-                break;
-            
-        }
+        this.hp = 100;
     }
 
     move() {
@@ -114,6 +63,10 @@ class Player {
         this.cam.rotation.y += this.camVel;
         
         this.collision();
+        
+//        document.write(
+//            "<div id=\"info\">Vida: " + this.hp + "</div>"
+//        );
     }
 
 }

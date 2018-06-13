@@ -6,12 +6,70 @@
         <style>
             body { margin: 0; overflow: hidden;}
             canvas { width: 100%; height: 100%; background: blue}
+            #vida {position: absolute;
+                  top: 10px;
+                  width: 100%;
+                  text-align: center;
+                  z-index: 100;
+                  display:block;}
         </style>
     </head>
     <body>
         <canvas id="canvas"></canvas>
+        <div id="vida">
+            <p>Vida:</p>
+        </div>
         <script src="lib/three.js"></script>
+        <script>
+
+            document.addEventListener("keydown", this.keyPress);
+            document.addEventListener("keyup", this.keyRelease);
+
+            function keyPress(e) {
+                switch (e.keyCode) {
+                    // W (Forward)
+                    case 87:
+                        p1.forward = true;
+                        break;
+                        // S (Back)
+                    case 83:
+                        p1.back = true;
+                        break;
+                        // D (Right)
+                    case 68:
+                        p1.lookRight = true;
+                        break;
+                        // A (Left)
+                    case 65:
+                        p1.lookLeft = true;
+                        break;
+                }
+            }
+
+            function keyRelease(e) {
+                switch (e.keyCode) {
+                    // W (Forward)
+                    case 87:
+                        p1.forward = false;
+                        break;
+                        // S (Back)
+                    case 83:
+                        p1.back = false;
+                        break;
+                        // D (Right)
+                    case 68:
+                        p1.lookRight = false;
+                        break;
+                        // A (Left)
+                    case 65:
+                        p1.lookLeft = false;
+                        break;
+                }
+            }
+
+        </script>
         <script src="player/player.js"></script>
+        <script src="inimigo.js"></script>
         <script src="main.js"></script>
     </body>
 </html>
